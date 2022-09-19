@@ -23,7 +23,8 @@ document.addEventListener( 'DOMContentLoaded', e => {
 
 			document.getElementById( 'textInstallment' ).innerHTML = formatter.format( theEMI );
 
-			let i, principal, intecomp, tr,
+			let i, principal, intecomp,
+				tr = '',
 				totPrincipal = 0,
 				totalIntecomp = 0,
 				balance = amount;
@@ -51,14 +52,14 @@ document.addEventListener( 'DOMContentLoaded', e => {
 		},
 
 		flat = ( amount, interest, period ) => {
-			const theInterest = interest * period,
-				principal = amount / period,
-				intecomp = principal * theInterest,
+			const principal = amount / period,
+				intecomp = amount * interest,
 				theInstallment = principal + intecomp;
 
-			document.getElementById( '#textInstallment' ).innerHTML = formatter.format( theInstallment );
+			document.getElementById( 'textInstallment' ).innerHTML = formatter.format( theInstallment );
 
-			let i, tr,
+			let i,
+				tr = '',
 				totPrincipal = 0,
 				totalIntecomp = 0,
 				balance = amount;
@@ -86,9 +87,10 @@ document.addEventListener( 'DOMContentLoaded', e => {
 		effective = ( amount, interest, period ) => {
 			const principal = amount / period;
 
-			document.getElementById( '#textInstallment' ).innerHTML = 'Lihat tabel';
+			document.getElementById( 'textInstallment' ).innerHTML = 'Lihat tabel';
 
-			let i, intecomp, theInstallment, tr,
+			let i, intecomp, theInstallment,
+				tr = '',
 				totPrincipal = 0,
 				totalIntecomp = 0,
 				totalInstallment = 0,
@@ -120,9 +122,9 @@ document.addEventListener( 'DOMContentLoaded', e => {
 	$form.querySelector( '#csCount' ).addEventListener( 'click', e => {
 		formReset();
 
-		const csAmount = Number( document.getElementById( 'csAmount' ).value.replaceAll( '.', '' ).replaceAll( ',', '.' ) ),
-			csInterest = ( Number( document.getElementById( 'csInterest' ).value.replaceAll( '.', '' ).replaceAll( ',', '.' ) ) / 12 ) / 100,
-			csPeriod = Number( document.getElementById( 'csPeriod' ).value.replaceAll( '.', '' ).replaceAll( ',', '.' ) ),
+		const csAmount = Number( document.getElementById( 'csAmount' ).value ),
+			csInterest = ( Number( document.getElementById( 'csInterest' ).value ) / 12 ) / 100,
+			csPeriod = Number( document.getElementById( 'csPeriod' ).value ),
 			csType = document.getElementById( 'csType' ).value;
 
 		document.getElementById( 'textPeriod' ).innerHTML = `${csPeriod} bulan`;

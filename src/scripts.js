@@ -50,9 +50,8 @@ jQuery( $ => {
 		},
 
 		flat = ( amount, interest, period ) => {
-			const theInterest = interest * period,
-				principal = amount / period,
-				intecomp = principal * theInterest,
+			const principal = amount / period,
+				intecomp = amount * interest,
 				theInstallment = principal + intecomp;
 
 			$( '#textInstallment' ).text( formatter.format( theInstallment ) );
@@ -121,9 +120,9 @@ jQuery( $ => {
 	$form.on( 'click', '#csCount', e => {
 		formReset();
 
-		const csAmount = Number( $( '#csAmount' ).val().replaceAll( '.', '' ).replaceAll( ',', '.' ) ),
-			csInterest = ( Number( $( '#csInterest' ).val().replaceAll( '.', '' ).replaceAll( ',', '.' ) ) / 12 ) / 100,
-			csPeriod = Number( $( '#csPeriod' ).val().replaceAll( '.', '' ).replaceAll( ',', '.' ) ),
+		const csAmount = Number( $( '#csAmount' ).val() ),
+			csInterest = ( Number( $( '#csInterest' ).val() ) / 12 ) / 100,
+			csPeriod = Number( $( '#csPeriod' ).val() ),
 			csType = $( '#csType' ).val();
 
 		$( '#textPeriod' ).text( `${csPeriod} bulan` );

@@ -41,9 +41,9 @@ add_action( 'init', function() {
 			'bunga'   => '16.2',
 		], $atts );
 
-		$amount   = number_format( (float) sanitize_text_field( $atts['nominal'] ), 0, ',', '.' );
-		$period   = number_format( (float) sanitize_text_field( $atts['jangka'] ), 0, ',', '.' );
-		$interest = number_format( (float) sanitize_text_field( $atts['bunga'] ), 2, ',', '.' );
+		$amount   = (int) sanitize_text_field( $atts['nominal'] );
+		$period   = (int) sanitize_text_field( $atts['jangka'] );
+		$interest = (float) sanitize_text_field( $atts['bunga'] );
 
 		ob_start();
 		include_once APB_PATH . 'simulator.php';
