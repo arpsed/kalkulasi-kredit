@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>input</title>
+		<link href="styles.css" rel="stylesheet" media="screen" />
+	</head>
+	<body>
+		<section class="cs-container">
+			<form id="creditSimulation" method="get">
+				<h3 class="cs-title">Kalkulator Simulasi</h3>
+				<div class="cs-form-row">
+					<label for="csAmount" class="cs-form-label">Jumlah Pinjaman</label>
+					<div class="cs-form-field cs-input-group">
+						<span class="cs-input-group-text">Rp.</span>
+						<input id="csAmount" type="text" value="13.120.000" class="cs-form-control" inputmode="numeric">
+					</div>
+				</div>
+				<div class="cs-form-row">
+					<label for="csPeriod" class="cs-form-label">Jangka Waktu</label>
+					<div class="cs-form-field cs-input-group">
+						<input id="csPeriod" type="text" value="24" class="cs-form-control" inputmode="numeric">
+						<span class="cs-input-group-text">bulan</span>
+					</div>
+				</div>
+				<div class="cs-form-row">
+					<label for="csInterest" class="cs-form-label">Bunga</label>
+					<div class="cs-form-field cs-input-group">
+						<input id="csInterest" type="text" value="16,2" class="cs-form-control" inputmode="decimal">
+						<span class="cs-input-group-text">% /tahun</span>
+					</div>
+				</div>
+				<div class="cs-form-row">
+					<label for="csType" class="cs-form-label">Perhitungan Bunga</label>
+					<div class="cs-form-field">
+						<select id="csType" name="textType" class="cs-form-select">
+							<option value="annuity">ANUITAS</option>
+							<option value="flat">FLAT</option>
+							<option value="effective">EFEKTIF</option>
+						</select>
+					</div>
+				</div>
+				<div style="text-align:right;">
+					<button id="csCount" type="button" class="cs-button">Kalkulasi</button>
+					&nbsp;
+					<button type="reset" class="cs-button">Bersihkan</button>
+				</div>
+			</form>
+			<div class="result-container" style="display:none;">
+				<div class="installment-info">
+					<p><strong>Total Pinjaman:</strong> <span id="textAmount">&nbsp;</span></p>
+					<p><strong>Jangka Waktu:</strong> <span id="textPeriod">&nbsp;</span></p>
+					<p><strong>Angsuran /bulan:</strong> <span id="textInstallment">&nbsp;</span></p>
+				</div>
+				<table class="installment-table">
+					<thead>
+						<tr>
+							<th scope="col">Angsuran</th>
+							<th scope="col">Pokok</th>
+							<th scope="col">Bunga</th>
+							<th scope="col">Pembayaran</th>
+							<th scope="col">Sisa</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th scope="col">Total</th>
+							<th scope="col">&nbsp;</th>
+							<th scope="col">&nbsp;</th>
+							<th scope="col">&nbsp;</th>
+							<th scope="col">&nbsp;</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</section>
+
+		<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"></script>
+		<script src="scripts.js"></script>
+	</body>
+</html>

@@ -1,0 +1,204 @@
+*, ::after, ::before {
+	box-sizing: border-box;
+}
+
+.cs-container {
+	width: 100%;
+	max-width: 864px;
+	margin: 1.5rem auto;
+}
+
+.cs-container * {
+	font-size: 1rem;
+	line-height: 1.3333;
+}
+
+.cs-title {
+	font-size: 1.5rem;
+	margin: 0 0 1.5rem;
+}
+
+.result-container {
+	margin-top: 1rem;
+}
+
+.result-container > * {
+	padding: 1.5rem;
+}
+
+.result-container p {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+.result-container p:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.cs-form-row {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: calc(-.5 * 1.5rem);
+	margin-bottom: 1rem;
+	margin-left: calc(-.5 * 1.5rem);
+}
+
+.cs-form-row > * {
+	flex: 0 0 auto;
+	width: 100%;
+	max-width: 100%;
+	padding-right: calc(1.5rem * .5);
+	padding-left: calc(1.5rem * .5);
+}
+
+.cs-form-label {
+	font-size: 1rem;
+	margin-bottom: 0;
+	padding-top: calc(.375rem + 1px);
+	padding-bottom: calc(.375rem + 1px);
+}
+
+.cs-form-control {
+	color: #212529;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	display: block;
+	background-color: #fff;
+	background-clip: padding-box;
+	width: 100%;
+	padding: .375rem .75rem;
+	border: thin solid #ced4da;
+	border-radius: .375rem;
+	appearance: none;
+}
+
+.cs-form-select {
+	color: #212529;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	display: block;
+	width: 100%;
+	padding: .375rem 2.25rem .375rem .75rem;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right .75rem center;
+	background-size: 16px 12px;
+	border: thin solid #ced4da;
+	border-radius: .375rem;
+	appearance: none;
+}
+
+.cs-input-group {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	width: 100%;
+	position: relative;
+}
+
+.cs-input-group-text {
+	color: #212529;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: center;
+	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	background-color: #e9ecef;
+	padding: .375rem .75rem;
+	border: thin solid #ced4da;
+	border-radius: .375rem;
+}
+
+.cs-input-group > .cs-form-control,
+.cs-input-group > .cs-form-select {
+	flex: 1 1 auto;
+	width: 1%;
+	min-width: 0;
+	position: relative;
+}
+
+.cs-input-group > :not(:last-child) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.cs-input-group > :not(:first-child) {
+	margin-left: -1px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.cs-button {
+	color: #fff;
+	line-height: 1.5;
+	display: inline-block;
+	background-color: #1e73be;
+	padding: 0.375rem 0.75rem;
+	border: thin solid #1e73be;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+	border-color: inherit;
+	border-style: solid;
+	border-width: 0;
+}
+
+.installment-table {
+	--bs-table-accent-bg: transparent;
+	width: 100%;
+	caption-side: bottom;
+	border-color: #dee2e6;
+	border-collapse: collapse;
+}
+
+.installment-table > thead {
+	vertical-align: bottom;
+}
+
+.installment-table > tbody {
+	vertical-align: inherit;
+}
+
+.installment-table th {
+	text-align: inherit;
+}
+
+.installment-table > tbody > tr:nth-of-type(2n+1) > * {
+	--bs-table-accent-bg: rgba(0,0,0,0.05);
+}
+
+.installment-table > :not(caption) > * > * {
+	background-color: transparent;
+	padding: .5rem .5rem;
+	border-bottom-width: 1px;
+	box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+@media only screen and (min-width: 576px) {
+	.cs-form-label {
+		width: 25%;
+	}
+
+	.cs-form-field {
+		width: 75%;
+	}
+
+	.result-container p {
+		flex-direction: row;
+	}
+
+	.result-container p > * {
+		width: 50%;
+	}
+}
