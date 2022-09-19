@@ -1,7 +1,8 @@
 <?php
 /**
  * Plugin Name: Angsuran Per Bulan
- * Description: Plugin untuk menampilkan angsuran perbulan.
+ * Plugin URI: https://github.com/arpsed/kalkulasi-kredit
+ * Description: Plugin untuk menyimulasi kredit secara umum.
  * Version: 1.1.0
  * Author: Dessi Prayogo
  * Author URI: https://github.com/arpsed
