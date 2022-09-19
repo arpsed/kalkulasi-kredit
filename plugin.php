@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Angsuran Per Bulan
+ * Plugin Name: Kalkulasi Kredit
  * Plugin URI: https://github.com/arpsed/kalkulasi-kredit
  * Description: Plugin untuk menyimulasi kredit secara umum.
  * Version: 1.1.0
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  *
  * @since 1.0.0
- * @package simkre
+ * @package anpebu
  */
 
 defined( 'ABSPATH' ) || exit;
