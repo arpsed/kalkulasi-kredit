@@ -1,27 +1,30 @@
-jQuery( $ => {
-	const $form = $( '#creditSimulation' ),
-		$csTable = $( '.installment-table' ),
-		$tbody = $csTable.find( 'tbody' ),
-		$tfoot = $csTable.find( 'tfoot' ),
+document.addEventListener( 'DOMContentLoaded', e => {
+	const $form = document.getElementById( 'creditSimulation' ),
+		$csTable = document.querySelector( '.installment-table' ),
+		$tbody = $csTable.querySelector( 'tbody' ),
+		$tfoot = $csTable.querySelector( 'tfoot' ),
 		formatter = new Intl.NumberFormat( 'id-ID', {
 			style: 'currency',
 			currency: 'IDR',
 		}),
 
 		formReset = () => {
-			$( '.result-container p span' ).empty()
-				.parents( '.result-container' ).css( 'display', 'none' );
-			$tbody.empty();
-			$tfoot.find( 'th:not(:first-child)' ).html( '&nbsp;' );
+			document.querySelector( '.result-container' ).style.display = 'none';
+			document.querySelectorAll( '.result-container p span' ).forEach( span => {
+				span.innerHTML = '&nbsp;';
+			});
+			$tbody.innerHTML = '';
+			$tfoot.querySelector( 'th:not(:first-child)' ).innerHTML = '&nbsp;';
 		},
 
 		annuity = ( amount, interest, period ) => {
 			const rateMonths = ( 1 + interest ) ** period,
 				theEMI = amount * interest * ( rateMonths / ( rateMonths - 1 ) );
 
-			$( '#textInstallment' ).text( formatter.format( theEMI ) );
+			document.getElementById( 'textInstallment' ).innerHTML = formatter.format( theEMI );
 
-			let i, principal, intecomp, tr,
+			let i, principal, intecomp,
+				tr = '',
 				totPrincipal = 0,
 				totalIntecomp = 0,
 				balance = amount;
@@ -34,19 +37,18 @@ jQuery( $ => {
 				balance = balance - principal;
 				balance = balance <= 0 ? 0 : balance;
 
-				tr = '';
 				tr += `<tr><th scope="row">${i + 1}</th>`;
 				tr += `<td>${formatter.format( principal )}</td>`;
 				tr += `<td>${formatter.format( intecomp )}</td>`;
 				tr += `<td>${formatter.format( theEMI )}</td>`;
 				tr += `<td>${formatter.format( balance )}</td></tr>`;
-
-				$tbody.append( tr );
 			}
 
-			$tfoot.find( ':nth-child(2)' ).text( formatter.format( totPrincipal ) );
-			$tfoot.find( ':nth-child(3)' ).text( formatter.format( totalIntecomp ) );
-			$tfoot.find( ':nth-child(4)' ).text( formatter.format( theEMI * period ) );
+			$tbody.innerHTML += tr;
+
+			$tfoot.querySelector( ':nth-child(2)' ).innerHTML = formatter.format( totPrincipal );
+			$tfoot.querySelector( ':nth-child(3)' ).innerHTML = formatter.format( totalIntecomp );
+			$tfoot.querySelector( ':nth-child(4)' ).innerHTML = formatter.format( theEMI * period );
 		},
 
 		flat = ( amount, interest, period ) => {
@@ -54,9 +56,10 @@ jQuery( $ => {
 				intecomp = amount * interest,
 				theInstallment = principal + intecomp;
 
-			$( '#textInstallment' ).text( formatter.format( theInstallment ) );
+			document.getElementById( 'textInstallment' ).innerHTML = formatter.format( theInstallment );
 
-			let i, tr,
+			let i,
+				tr = '',
 				totPrincipal = 0,
 				totalIntecomp = 0,
 				balance = amount;
@@ -67,27 +70,27 @@ jQuery( $ => {
 				totPrincipal += principal;
 				totalIntecomp += intecomp;
 
-				tr = '';
 				tr += `<tr><th scope="row">${i + 1}</th>`;
 				tr += `<td>${formatter.format( principal )}</td>`;
 				tr += `<td>${formatter.format( intecomp )}</td>`;
 				tr += `<td>${formatter.format( theInstallment )}</td>`;
 				tr += `<td>${formatter.format( balance )}</td></tr>`;
-
-				$tbody.append( tr );
 			}
 
-			$tfoot.find( ':nth-child(2)' ).text( formatter.format( totPrincipal ) );
-			$tfoot.find( ':nth-child(3)' ).text( formatter.format( totalIntecomp ) );
-			$tfoot.find( ':nth-child(4)' ).text( formatter.format( theInstallment * period ) );
+			$tbody.innerHTML += tr;
+
+			$tfoot.querySelector( ':nth-child(2)' ).innerHTML = formatter.format( totPrincipal );
+			$tfoot.querySelector( ':nth-child(3)' ).innerHTML = formatter.format( totalIntecomp );
+			$tfoot.querySelector( ':nth-child(4)' ).innerHTML = formatter.format( theInstallment * period );
 		},
 
 		effective = ( amount, interest, period ) => {
 			const principal = amount / period;
 
-			$( '#textInstallment' ).text( 'Lihat tabel' );
+			document.getElementById( 'textInstallment' ).innerHTML = 'Lihat tabel';
 
-			let i, intecomp, theInstallment, tr,
+			let i, intecomp, theInstallment,
+				tr = '',
 				totPrincipal = 0,
 				totalIntecomp = 0,
 				totalInstallment = 0,
@@ -102,36 +105,35 @@ jQuery( $ => {
 				totPrincipal += principal;
 				totalIntecomp += intecomp;
 
-				tr = '';
 				tr += `<tr><th scope="row">${i + 1}</th>`;
 				tr += `<td>${formatter.format( principal )}</td>`;
 				tr += `<td>${formatter.format( intecomp )}</td>`;
 				tr += `<td>${formatter.format( theInstallment )}</td>`;
 				tr += `<td>${formatter.format( balance )}</td></tr>`;
-
-				$tbody.append( tr );
 			}
 
-			$tfoot.find( ':nth-child(2)' ).text( formatter.format( totPrincipal ) );
-			$tfoot.find( ':nth-child(3)' ).text( formatter.format( totalIntecomp ) );
-			$tfoot.find( ':nth-child(4)' ).text( formatter.format( totalInstallment ) );
+			$tbody.innerHTML += tr;
+
+			$tfoot.querySelector( ':nth-child(2)' ).innerHTML = formatter.format( totPrincipal );
+			$tfoot.querySelector( ':nth-child(3)' ).innerHTML = formatter.format( totalIntecomp );
+			$tfoot.querySelector( ':nth-child(4)' ).innerHTML = formatter.format( totalInstallment );
 		};
 
-	$form.on( 'click', '#csCount', e => {
+	$form.querySelector( '#csCount' ).addEventListener( 'click', e => {
 		formReset();
 
-		const csAmount = Number( $( '#csAmount' ).val() ),
-			csInterest = ( Number( $( '#csInterest' ).val() ) / 12 ) / 100,
-			csPeriod = Number( $( '#csPeriod' ).val() ),
-			csType = $( '#csType' ).val();
+		const csAmount = Number( document.getElementById( 'csAmount' ).value ),
+			csInterest = ( Number( document.getElementById( 'csInterest' ).value ) / 12 ) / 100,
+			csPeriod = Number( document.getElementById( 'csPeriod' ).value ),
+			csType = document.getElementById( 'csType' ).value;
 
-		$( '#textPeriod' ).text( `${csPeriod} bulan` );
-		$( '#textAmount' ).text( formatter.format( csAmount ) );
+		document.getElementById( 'textPeriod' ).innerHTML = `${csPeriod} bulan`;
+		document.getElementById( 'textAmount' ).innerHTML = formatter.format( csAmount );
 
 		let tr = '<tr><th scope="row">0</th><td>0</td><td>0</td>';
 		tr += `<td>0</td><td>${formatter.format( csAmount )}</td></tr>`;
 
-		$tbody.append( tr );
+		$tbody.innerHTML = tr;
 
 		if ( csType === 'annuity' ) {
 			annuity( csAmount, csInterest, csPeriod );
@@ -143,17 +145,14 @@ jQuery( $ => {
 			return;
 		}
 
-		$( '.result-container' ).css( 'display', '' );
+		document.querySelector( '.result-container' ).style.display = '';
 	});
 
-	$form.on( 'reset', e => {
+	$form.addEventListener( 'reset', e => {
 		formReset();
 	});
 
-	$form.on( 'input', '[type="text"]', function ( e ) {
-		const $this = $( this ),
-			theValue = $this.val();
-
-		$this.val( theValue.replace( /[^0-9.,]/, '' ) );
+	$form.querySelector( '[type="text"]' ).addEventListener( 'input', function ( e ) {
+		this.value = this.value.replace( /[^0-9.,]/, '' );
 	});
 });
