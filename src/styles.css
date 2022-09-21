@@ -143,6 +143,15 @@
 	border: thin solid #1e73be;
 }
 
+.cs-info {
+	color: #055160;
+	background-color: #cff4fc;
+	margin: 1rem 0;
+	padding: 1rem;
+	border: thin solid #b6effb;
+	border-radius: 0.375rem;
+}
+
 tbody,
 td,
 tfoot,

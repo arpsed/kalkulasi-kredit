@@ -32,6 +32,7 @@
 				</select>
 			</div>
 		</div>
+		<p class="cs-info" role="alert"><?php esc_html_e( 'Gunakan . (titik) untuk desimal', 'anpebu' ); ?></p>
 		<div style="text-align:right;">
 			<button id="csCount" type="button" class="cs-button"><?php esc_html_e( 'Kalkulasi', 'anpebu' ); ?></button>
 			&nbsp;

@@ -124,7 +124,7 @@ document.addEventListener( 'DOMContentLoaded', e => {
 
 		const csAmount = Number( document.getElementById( 'csAmount' ).value ),
 			csInterest = ( Number( document.getElementById( 'csInterest' ).value ) / 12 ) / 100,
-			csPeriod = Number( document.getElementById( 'csPeriod' ).value ),
+			csPeriod = Math.round( Number( document.getElementById( 'csPeriod' ).value ) ),
 			csType = document.getElementById( 'csType' ).value;
 
 		document.getElementById( 'textPeriod' ).innerHTML = `${csPeriod} bulan`;
