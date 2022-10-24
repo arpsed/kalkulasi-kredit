@@ -54,5 +54,6 @@ add_action( 'init', function() {
 
 add_action( 'wp_enqueue_scripts', function() {
 	wp_register_style( 'anpebu', APB_URL . 'styles.css', [], APB_VER, 'screen' );
-	wp_register_script( 'anpebu', APB_URL . 'scripts.js', [ 'jquery' ], APB_VER, true );
+	wp_register_script( 'anpebu', APB_URL . 'scripts.js', [ 'jquery', 'html2pdf' ], APB_VER, true );
+	wp_register_script( 'html2pdf', 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js', [], '0.9.3', true );
 } );

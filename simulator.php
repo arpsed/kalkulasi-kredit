@@ -67,5 +67,6 @@
 				</tr>
 			</tfoot>
 		</table>
+		<a id="csDownload" href="javascript:;"><?php esc_html_e( 'Unduh Simulasi Kredit', 'anpebu' ); ?></a>
 	</div>
 </section>

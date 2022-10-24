@@ -1,5 +1,8 @@
+/* global html2pdf */
+
 document.addEventListener( 'DOMContentLoaded', e => {
 	const $form = document.getElementById( 'creditSimulation' ),
+		$result = document.querySelector( '.result-container' ),
 		$csTable = document.querySelector( '.installment-table' ),
 		$tbody = $csTable.querySelector( 'tbody' ),
 		$tfoot = $csTable.querySelector( 'tfoot' ),
@@ -9,19 +12,19 @@ document.addEventListener( 'DOMContentLoaded', e => {
 		}),
 
 		formReset = () => {
-			document.querySelector( '.result-container' ).style.display = 'none';
-			document.querySelectorAll( '.result-container p span' ).forEach( span => {
+			$result.style.display = 'none';
+			$result.querySelectorAll( 'p span' ).forEach( span => {
 				span.innerHTML = '&nbsp;';
 			});
 			$tbody.innerHTML = '';
 			$tfoot.querySelector( 'th:not(:first-child)' ).innerHTML = '&nbsp;';
 		},
 
-		annuity = ( amount, interest, period ) => {
+		annuity = ( amount, interest, period, type ) => {
 			const rateMonths = ( 1 + interest ) ** period,
 				theEMI = amount * interest * ( rateMonths / ( rateMonths - 1 ) );
 
-			document.getElementById( 'textInstallment' ).innerHTML = formatter.format( theEMI );
+			document.getElementById( 'textInstallment' ).innerHTML = type + ' - ' + formatter.format( theEMI );
 
 			let i, principal, intecomp,
 				tr = '',
@@ -51,12 +54,12 @@ document.addEventListener( 'DOMContentLoaded', e => {
 			$tfoot.querySelector( ':nth-child(4)' ).innerHTML = formatter.format( theEMI * period );
 		},
 
-		flat = ( amount, interest, period ) => {
+		flat = ( amount, interest, period, type ) => {
 			const principal = amount / period,
 				intecomp = amount * interest,
 				theInstallment = principal + intecomp;
 
-			document.getElementById( 'textInstallment' ).innerHTML = formatter.format( theInstallment );
+			document.getElementById( 'textInstallment' ).innerHTML = type + ' - ' + formatter.format( theInstallment );
 
 			let i,
 				tr = '',
@@ -84,10 +87,10 @@ document.addEventListener( 'DOMContentLoaded', e => {
 			$tfoot.querySelector( ':nth-child(4)' ).innerHTML = formatter.format( theInstallment * period );
 		},
 
-		effective = ( amount, interest, period ) => {
+		effective = ( amount, interest, period, type ) => {
 			const principal = amount / period;
 
-			document.getElementById( 'textInstallment' ).innerHTML = 'Lihat tabel';
+			document.getElementById( 'textInstallment' ).innerHTML = type + ' - ' + 'Lihat tabel';
 
 			let i, intecomp, theInstallment,
 				tr = '',
@@ -125,7 +128,8 @@ document.addEventListener( 'DOMContentLoaded', e => {
 		const csAmount = Number( document.getElementById( 'csAmount' ).value ),
 			csInterest = ( Number( document.getElementById( 'csInterest' ).value ) / 12 ) / 100,
 			csPeriod = Math.round( Number( document.getElementById( 'csPeriod' ).value ) ),
-			csType = document.getElementById( 'csType' ).value;
+			csType = document.getElementById( 'csType' ),
+			csTypeLabel = csType.options[ csType.selectedIndex ].text;
 
 		document.getElementById( 'textPeriod' ).innerHTML = `${csPeriod} bulan`;
 		document.getElementById( 'textAmount' ).innerHTML = formatter.format( csAmount );
@@ -135,17 +139,17 @@ document.addEventListener( 'DOMContentLoaded', e => {
 
 		$tbody.innerHTML = tr;
 
-		if ( csType === 'annuity' ) {
-			annuity( csAmount, csInterest, csPeriod );
-		} else if ( csType === 'flat' ) {
-			flat( csAmount, csInterest, csPeriod );
-		} else if ( csType === 'effective' ) {
-			effective( csAmount, csInterest, csPeriod );
+		if ( csType.value === 'annuity' ) {
+			annuity( csAmount, csInterest, csPeriod, csTypeLabel );
+		} else if ( csType.value === 'flat' ) {
+			flat( csAmount, csInterest, csPeriod, csTypeLabel );
+		} else if ( csType.value === 'effective' ) {
+			effective( csAmount, csInterest, csPeriod, csTypeLabel );
 		} else {
 			return;
 		}
 
-		document.querySelector( '.result-container' ).style.display = '';
+		$result.style.display = '';
 	});
 
 	$form.addEventListener( 'reset', e => {
@@ -154,5 +158,16 @@ document.addEventListener( 'DOMContentLoaded', e => {
 
 	$form.querySelector( '[type="text"]' ).addEventListener( 'input', function ( e ) {
 		this.value = this.value.replace( /[^0-9.,]/, '' );
+	});
+
+	$result.querySelector( '#csDownload' ).addEventListener( 'click', e => {
+		e.preventDefault();
+
+		const opt = {
+			filename: 'kalkulasi-kredit.pdf',
+			margin: 10,
+		};
+
+		html2pdf().set( opt ).from( $result ).save();
 	});
 });

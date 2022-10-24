@@ -36,6 +36,12 @@
 	margin-bottom: 1rem;
 }
 
+#csDownload {
+	display: inline-block;
+	margin-top: 1em;
+	padding: 0;
+}
+
 .cs-form-row {
 	display: flex;
 	flex-wrap: wrap;
